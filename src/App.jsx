@@ -161,14 +161,14 @@ const App = () => {
       <main className="max-w-6xl mx-auto px-4 mt-8 space-y-6">
         
         {/* コントロールパネル */}
-        <div className="bg-white p-5 rounded-xl shadow-sm border border-gray-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div className="flex flex-col sm:flex-row sm:items-center gap-4 flex-1">
+        <div className="bg-white p-4 md:p-5 rounded-xl shadow-sm border border-gray-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3 flex-1">
             <label className="font-bold flex items-center gap-2 text-gray-700 whitespace-nowrap">
-              <BookOpen className="text-blue-500" size={20} />
+              <BookOpen className="text-blue-500 flex-shrink-0" size={20} />
               データサイズ：
             </label>
             <select 
-              className="w-full sm:max-w-xs p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white"
+              className="w-full sm:max-w-xs p-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white shadow-sm text-gray-700 font-medium"
               value={selectedDataset}
               onChange={handleDatasetChange}
               disabled={isLoadingExpected}
@@ -181,29 +181,29 @@ const App = () => {
             </select>
           </div>
 
-          <div className="flex items-center gap-2 bg-gray-50 p-2 px-3 rounded-lg border border-gray-200">
-            <Settings size={18} className="text-gray-500" />
-            <label className="flex items-center gap-2 cursor-pointer text-sm font-medium text-gray-700 select-none">
-              <input 
-                type="checkbox" 
-                className="rounded text-indigo-600 focus:ring-indigo-500 w-4 h-4"
-                checked={isFlexibleMatch}
-                onChange={(e) => setIsFlexibleMatch(e.target.checked)}
-              />
+          <label className="flex items-center justify-center sm:justify-start gap-2.5 bg-gray-50 hover:bg-gray-100 p-2.5 px-4 rounded-lg border border-gray-200 cursor-pointer transition shadow-sm w-full md:w-auto">
+            <Settings size={18} className="text-gray-500 flex-shrink-0" />
+            <input 
+              type="checkbox" 
+              className="rounded text-indigo-600 focus:ring-indigo-500 w-4 h-4 flex-shrink-0"
+              checked={isFlexibleMatch}
+              onChange={(e) => setIsFlexibleMatch(e.target.checked)}
+            />
+            <span className="text-sm font-medium text-gray-700 select-none">
               大文字小文字・余分な空白の違いを無視
-            </label>
-          </div>
+            </span>
+          </label>
         </div>
 
         {/* 入力エリア */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="bg-white p-5 rounded-xl shadow-sm border border-gray-200 relative">
-            <div className="flex justify-between items-center mb-4 h-8">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 min-h-[2rem]">
               <h2 className="text-lg font-bold flex items-center gap-2 text-gray-700">
-                <FileText className="text-blue-500" size={20} />
+                <FileText className="text-blue-500 flex-shrink-0" size={20} />
                 模範解答 (Expected)
               </h2>
-              <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded font-bold">サーバーファイル</span>
+              <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded font-bold self-start sm:self-auto">サーバーファイル</span>
             </div>
             
             <div className="relative">
@@ -222,12 +222,12 @@ const App = () => {
           </div>
 
           <div className="bg-white p-5 rounded-xl shadow-sm border border-gray-200">
-            <div className="flex justify-between items-center mb-4 h-8">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 min-h-[2rem]">
               <h2 className="text-lg font-bold flex items-center gap-2 text-gray-700">
-                <FileText className="text-indigo-500" size={20} />
+                <FileText className="text-indigo-500 flex-shrink-0" size={20} />
                 自分の出力 (Actual)
               </h2>
-              <div>
+              <div className="self-start sm:self-auto">
                 <input 
                   type="file" 
                   accept=".txt,.out,.in" 
@@ -237,7 +237,7 @@ const App = () => {
                 />
                 <button 
                   onClick={() => actualFileRef.current.click()}
-                  className="text-sm bg-indigo-50 hover:bg-indigo-100 text-indigo-700 py-1.5 px-3 rounded flex items-center gap-1 transition border border-indigo-200 font-medium"
+                  className="text-sm bg-indigo-50 hover:bg-indigo-100 text-indigo-700 py-1.5 px-3 rounded flex items-center gap-1 transition border border-indigo-200 font-medium whitespace-nowrap"
                 >
                   <Upload size={16} /> ファイルを選択
                 </button>
@@ -296,7 +296,7 @@ const App = () => {
 
             {!isAllCorrect && (
               <div className="mb-4 flex items-center gap-2">
-                <label className="flex items-center gap-2 cursor-pointer text-sm bg-gray-100 hover:bg-gray-200 py-1.5 px-3 rounded transition">
+                <label className="flex items-center gap-2 cursor-pointer text-sm bg-gray-100 hover:bg-gray-200 py-1.5 px-3 rounded transition border border-gray-200">
                   <input 
                     type="checkbox" 
                     className="rounded text-indigo-600 focus:ring-indigo-500"
@@ -312,11 +312,11 @@ const App = () => {
             <div className="overflow-x-auto border border-gray-200 rounded-lg">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="bg-gray-100 text-gray-700 text-sm">
+                  <tr className="bg-gray-100 text-gray-700 text-sm whitespace-nowrap">
                     <th className="py-3 px-4 border-b w-16 text-center">行</th>
                     <th className="py-3 px-4 border-b w-16 text-center">判定</th>
-                    <th className="py-3 px-4 border-b w-1/2">模範解答 (Expected)</th>
-                    <th className="py-3 px-4 border-b w-1/2">自分の出力 (Actual)</th>
+                    <th className="py-3 px-4 border-b w-1/2 min-w-[200px]">模範解答 (Expected)</th>
+                    <th className="py-3 px-4 border-b w-1/2 min-w-[200px]">自分の出力 (Actual)</th>
                   </tr>
                 </thead>
                 <tbody className="text-sm">
@@ -341,10 +341,10 @@ const App = () => {
                             <XCircle size={20} className="text-red-500 mx-auto cursor-help" title={isFlexibleMatch ? `【判定用テキスト】\n模範: ${diff.normExpected}\n自分: ${diff.normActual}` : ''} />
                           )}
                         </td>
-                        <td className={`py-2 px-4 border-r font-mono break-all whitespace-pre-wrap ${!diff.isMatch && 'text-red-800'}`}>
+                        <td className={`py-2 px-4 border-r font-mono break-words whitespace-pre-wrap ${!diff.isMatch && 'text-red-800'}`}>
                           {renderTextWithVisibleSpaces(diff.expected, diff.isMatch)}
                         </td>
-                        <td className={`py-2 px-4 font-mono break-all whitespace-pre-wrap ${!diff.isMatch && 'text-red-800 font-bold'}`}>
+                        <td className={`py-2 px-4 font-mono break-words whitespace-pre-wrap ${!diff.isMatch && 'text-red-800 font-bold'}`}>
                           {renderTextWithVisibleSpaces(diff.actual, diff.isMatch)}
                         </td>
                       </tr>
